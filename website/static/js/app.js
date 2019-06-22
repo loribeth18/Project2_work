@@ -23,15 +23,15 @@ function buildCharts(city) {
   d3.json(url).then((data) =>{
 
     // @TODO: Build a Chart using the sample data
-    // const city = data.city;
-    // const crimetype = data.type;
+    const city = data[0].city;
+    const crimetype = data[0].type;
     const year = ["2010","2011","2012","2013","2014","2015","2016"]
-    const yearValues = [data["2010"],data["2011"],data["2012"],data["2013"],data["2014"],data["2015"],data["2016"]]
+    const yearValues = [data[0]["2010"],data[0]["2011"],data[0]["2012"],data[0]["2013"],data[0]["2014"],data[0]["2015"],data[0]["2016"]]
 
     var bardata = [{
-      //name: city,
+      name: city,
       x: year,
-      y: [642, 596, 581, 455, 385, 349,369],
+      y: yearValues,
       //data.map(row => row.["2016"]),
       //text: data.map(row => row.type),
       type: 'bar',
@@ -39,10 +39,10 @@ function buildCharts(city) {
       //hoverinfo: "hovertext",
     }];
 
-      var barlayout = {
+    var barlayout = {
       margin: {t:0,1:0}
-      };
-    
+    };
+    Plotly.purge('bar');
     Plotly.plot('bar', bardata, barlayout);
   });
 
